@@ -1,0 +1,155 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #A68A64; /* Earthy Gold from image */
+  --color-primary-dark: #8C7352;
+  --color-background-light: #F9F8F4; /* Warm Off-White */
+  --color-background-dark: #121212; /* Deep Black/Charcoal */
+  --color-text-main: #2A2A2A;
+  --color-text-muted: #666666;
+  --color-text-light: #E5E5E5;
+
+  --font-display: "Playfair Display", serif;
+  --font-sans: "Montserrat", sans-serif;
+  
+  --animate-fade-in: fade-in 1s ease-out;
+}
+
+/* Texture Utilities */
+/* Texture Utilities */
+/* Texture Utilities */
+/* Texture Utilities */
+.bg-texture-floral {
+  background-color: var(--color-background-light);
+  /* Replaced expensive SVG filter with a static lightweight noise pattern + gradient */
+  background-image: 
+    url("https://www.transparenttextures.com/patterns/cream-paper.png"),
+    radial-gradient(circle at 50% 50%, rgba(166, 138, 100, 0.08), transparent 80%);
+  background-blend-mode: multiply;
+  background-size: auto, cover;
+}
+
+.bg-texture-marble {
+    /* Keeping as fallback or specific decorative element */
+    background-color: var(--color-background-light);
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+}
+
+.bg-texture-gold {
+     background-color: var(--color-primary);
+     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E"),
+     linear-gradient(to bottom right, var(--color-primary), var(--color-primary-dark));
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@layer utilities {
+    .luxury-gradient {
+        background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.6));
+    }
+}
+
+.bg-grain-dark {
+    /* Kept as fallback/base dark gradient */
+    background-color: var(--color-background-dark);
+    background-image: radial-gradient(circle at 50% 0%, #2A2A2A, #121212);
+}
+
+.bg-wedding-texture {
+    background-color: var(--color-background-dark);
+    background-image: 
+        radial-gradient(circle at 50% 0%, rgba(166, 138, 100, 0.05), transparent 70%),
+        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    /* Note: Ideally this would be a real floral damask, but finding a complex path for data-URI without external assets is hard. 
+       Using a subtle decorative geometric pattern that feels 'designed' rather than 'noisy'. */
+}
+
+/* Better Wedding Pattern - Abstract Floral Curves */
+.bg-wedding-slate {
+    background-color: #1a1a1a;
+    background-image: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23A68A64' fill-opacity='0.05'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
+    radial-gradient(circle at 50% 0%, #2A2A2A, #101010);
+}
+
+.bg-gradient-soft {
+    background-color: var(--color-background-light);
+    background-image: 
+        radial-gradient(circle at 50% 0%, rgba(166, 138, 100, 0.08), transparent 70%),
+        linear-gradient(to bottom, #FFFFFF, #F9F8F4);
+}
+
+/* Fix bullet points in prose */
+.prose ul {
+    list-style-type: disc !important;
+    list-style-position: outside !important;
+    padding-left: 1.5rem !important;
+    margin-left: 1rem !important;
+}
+
+.prose ol {
+    list-style-type: decimal !important;
+    list-style-position: outside !important;
+    padding-left: 1.5rem !important;
+    margin-left: 1rem !important;
+}
+
+.prose li {
+    display: list-item !important;
+    margin: 0.5rem 0 !important;
+}
+
+.prose ul ul,
+.prose ol ul {
+    list-style-type: circle !important;
+}
+
+.prose ul ul ul,
+.prose ol ul ul {
+    list-style-type: square !important;
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+/* Fix WordPress-imported blog content text wrapping */
+.prose * {
+    hyphens: none !important;
+    -webkit-hyphens: none !important;
+    word-break: normal !important;
+    overflow-wrap: break-word;
+}
+
+.prose span,
+.prose div {
+    max-width: 100% !important;
+    display: inline !important;
+}
+
+/* Quill Editor Improvements */
+.quill-editor-wrapper .ql-toolbar {
+    border-bottom: 2px solid #e5e7eb !important;
+    background: #f9fafb;
+    flex-wrap: wrap;
+    padding: 8px 12px !important;
+}
+
+.quill-editor-wrapper .ql-container {
+    min-height: 550px;
+    font-size: 16px;
+    font-family: inherit;
+}
+
+.quill-editor-wrapper .ql-editor {
+    min-height: 550px;
+    padding: 24px !important;
+    line-height: 1.8;
+}
+
+.quill-editor-wrapper .ql-editor img {
+    max-width: 100%;
+    height: auto;
+}
