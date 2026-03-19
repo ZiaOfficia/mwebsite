@@ -117,7 +117,14 @@ const createBlog = async (req, res) => {
 
     res.status(201).json(blog);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    const isDuplicateSlug =
+      error.name === "SequelizeUniqueConstraintError" &&
+      error.fields?.slug !== undefined;
+    res.status(400).json({
+      message: isDuplicateSlug
+        ? "A post with this slug already exists. Please use a different slug."
+        : error.message,
+    });
   }
 };
 

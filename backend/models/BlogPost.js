@@ -35,15 +35,15 @@ const BlogPost = sequelize.define(
       allowNull: true,
     },
     meta_title: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: true,
     },
     meta_description: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: true,
     },
     meta_keywords: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: true,
     },
     author: {
