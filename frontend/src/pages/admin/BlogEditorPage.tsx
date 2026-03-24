@@ -138,6 +138,7 @@ const BlogEditorPage: React.FC = () => {
 
     const postData = {
       ...formData,
+      slug: formData.slug.replace(/^\/+/, ""), // strip leading slashes
       image_url: finalImageUrl,
     };
 
@@ -213,7 +214,7 @@ const BlogEditorPage: React.FC = () => {
               className="w-full bg-stone-900 border border-stone-700 text-stone-100 rounded px-4 py-2"
               value={formData.slug}
               onChange={(e) =>
-                setFormData({ ...formData, slug: e.target.value })
+                setFormData({ ...formData, slug: e.target.value.replace(/^\/+/, "") })
               }
               required
             />

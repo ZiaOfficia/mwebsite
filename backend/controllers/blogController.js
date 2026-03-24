@@ -69,7 +69,7 @@ const getBlogById = async (req, res) => {
 // @access  Public
 const getBlogBySlug = async (req, res) => {
   try {
-    const blog = await BlogPost.findOne({ where: { slug: req.params.slug } });
+    const blog = await BlogPost.findOne({ where: { slug: req.params.slug.replace(/^\/+/, "") } });
     if (blog) {
       res.json(blog);
     } else {
@@ -102,7 +102,7 @@ const createBlog = async (req, res) => {
 
     const blog = await BlogPost.create({
       title,
-      slug,
+      slug: slug.replace(/^\/+/, ""),
       excerpt,
       content,
       author,
@@ -117,13 +117,14 @@ const createBlog = async (req, res) => {
 
     res.status(201).json(blog);
   } catch (error) {
+    console.error("Blog create error:", error.name, error.message, error.fields);
     const isDuplicateSlug =
       error.name === "SequelizeUniqueConstraintError" &&
       error.fields?.slug !== undefined;
     res.status(400).json({
       message: isDuplicateSlug
         ? "A post with this slug already exists. Please use a different slug."
-        : error.message,
+        : `${error.name}: ${error.message}`,
     });
   }
 };
@@ -136,7 +137,9 @@ const updateBlog = async (req, res) => {
     const blog = await BlogPost.findByPk(req.params.id);
 
     if (blog) {
-      await blog.update(req.body);
+      const updateData = { ...req.body };
+      if (updateData.slug) updateData.slug = updateData.slug.replace(/^\/+/, "");
+      await blog.update(updateData);
       res.json(blog);
     } else {
       res.status(404).json({ message: "Blog not found" });
