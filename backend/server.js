@@ -43,13 +43,24 @@ sequelize
   .authenticate()
   .then(() => {
     console.log("MySQL Database Connected...");
-    // Ensure id column is INT AUTO_INCREMENT (sync alter can't always fix primary keys)
+    return sequelize.query(
+      "SELECT COLUMN_TYPE, COLUMN_DEFAULT, EXTRA FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='BlogPosts' AND COLUMN_NAME='id' AND TABLE_SCHEMA=DATABASE()"
+    );
+  })
+  .then(([rows]) => {
+    console.log("Current id column:", JSON.stringify(rows[0]));
     return sequelize.query(
       "ALTER TABLE BlogPosts MODIFY COLUMN id INT NOT NULL AUTO_INCREMENT"
-    ).catch(() => {}); // ignore if already correct or table doesn't exist yet
+    ).catch((err) => console.log("ALTER warning:", err.message));
   })
   .then(() => sequelize.sync({ alter: true }))
   .then(() => {
+    return sequelize.query(
+      "SELECT COLUMN_TYPE, EXTRA FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='BlogPosts' AND COLUMN_NAME='id' AND TABLE_SCHEMA=DATABASE()"
+    );
+  })
+  .then(([rows]) => {
+    console.log("id column after sync:", JSON.stringify(rows[0]));
     console.log("Database Synced");
   })
   .catch((err) => console.log("Error: " + err));
