@@ -44,10 +44,14 @@ sequelize
   .then(async () => {
     console.log("MySQL Database Connected...");
 
-    // Fix id column type
+    // Fix id column type and log auto_increment counter
     await sequelize.query(
       "ALTER TABLE BlogPosts MODIFY COLUMN id INT NOT NULL AUTO_INCREMENT"
     ).catch((err) => console.log("ALTER id warning:", err.message));
+    const [[aiRow]] = await sequelize.query(
+      "SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME='BlogPosts' AND TABLE_SCHEMA=DATABASE()"
+    ).catch(() => [[[]]]);
+    console.log("AUTO_INCREMENT counter:", aiRow?.AUTO_INCREMENT);
 
     // Drop ALL duplicate slug unique indexes (sync alter adds a new one every restart)
     const [indexes] = await sequelize.query(
