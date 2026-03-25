@@ -1,9 +1,6 @@
 Options -MultiViews
 RewriteEngine On
 
-# Redirect sitemap.xml to dynamic backend (auto-updates with every new blog post)
-RewriteRule ^sitemap\.xml$ https://elegantize-zl57.onrender.com/sitemap.xml [R=301,L]
-
 # Handle React Router - serve index.html for all non-file routes
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
