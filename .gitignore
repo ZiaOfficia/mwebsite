@@ -7,6 +7,8 @@ backend/node_modules/
 .env
 *.env
 frontend/.env
+frontend/.env.production
+frontend/.env.local
 backend/elegantize-backend.env
 
 # Build Output
@@ -35,6 +37,16 @@ logs/
 .DS_Store
 Thumbs.db
 Desktop.ini
+
+# Claude AI memory (local only)
+.claude/
+
+# Zip / archive files (build artifacts)
+*.zip
+
+# Misc local files
+ssss1.png
+implementation_plan.md
 
 # Other
 public/images

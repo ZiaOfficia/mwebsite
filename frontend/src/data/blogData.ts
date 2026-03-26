@@ -124,7 +124,7 @@ export const blogPosts: BlogPost[] = [
       "<p>The Mandap is the sacred center of a South Asian wedding. We explore designs ranging from traditional florals to modern acrylic structures.</p>",
     image: "/images/portfolio/kiranfritdjof-weddingphotos-1135-1.webp",
     date: "Nov 28, 2023",
-    author: "Piyush Singh",
+    author: "Elegantize Team",
     category: "Ceremony",
   },
   {
@@ -176,7 +176,7 @@ export const blogPosts: BlogPost[] = [
       "<p>Transporting custom builds and sourcing local flowers requires precision planning. Here is our checklist.</p>",
     image: "/images/portfolio/kiranfritdjof-weddingphotos-1135-1.webp",
     date: "Sep 30, 2023",
-    author: "Piyush Singh",
+    author: "Elegantize Team",
     category: "Planning",
   },
 ];
